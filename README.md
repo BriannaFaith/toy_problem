@@ -21,3 +21,12 @@ Links to an external site.-  Links to an external site.Links to an external site
 - www.kra.go.ke/en/individual/calculate-tax/calculating-tax/payeLinks to an external site.
 
 ##Setup instructions
+Clone the repository git@github.com:BriannaFaith/toy_problem.git
+Navigate to the project directory cd toy_problem
+Install dependencies npm install
+
+##Technologies
+Javascript
+
+##Licence
+Copyright (c) 2023 Brianna Faith
