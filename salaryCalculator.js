@@ -1,3 +1,4 @@
+// grossIncome composition
 function grossIncome(basicSalary, ...allowances) {
     let sum = basicSalary;
     for (let allowance of allowances) {
@@ -5,8 +6,9 @@ function grossIncome(basicSalary, ...allowances) {
     }
     return sum;
 }
-
+// NHIF deduction based on gross pay
 function calculateNHIF(grossPay) {
+    //NHIF rates
     if (grossPay <= 5999) {
         return 150;
     } else if (grossPay <= 7999) {
@@ -43,18 +45,18 @@ function calculateNHIF(grossPay) {
         return 1700;
     }
 }
-
+//NSSF deduction based on pensionable pay
 function NSSF(pensionablePay) {
     return pensionablePay * 0.06;
 }
-
+//Deducting specified amounts from gross income
 function taxablePay(grossIncome, ...deductions) {
     for (let deduction of deductions) {
         grossIncome -= deduction;
     }
     return grossIncome;
 }
-
+//PAYEE deduction  against taxable pay levels
 function PAYEE(taxablepay) {
     if (taxablepay <= 24000) {
         return taxablepay * 0.1;
@@ -65,6 +67,7 @@ function PAYEE(taxablepay) {
     }
 }
 
+//net pay after deducting PAYEE from taxable pay
 function netPay(taxablepay, payee) {
     return taxablepay - payee;
 }
