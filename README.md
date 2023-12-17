@@ -25,9 +25,8 @@ Clone the repository git@github.com:BriannaFaith/toy_problem.git
 Navigate to the project directory cd toy_problem
 Install dependencies npm install
 
-##Technologies
-
+## Technologies
 Javascript
 
-##Licence
+## Licence
 Copyright (c) 2023 Brianna Faith

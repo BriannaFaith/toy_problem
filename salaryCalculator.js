@@ -68,12 +68,3 @@ function PAYEE(taxablepay) {
 function netPay(taxablepay, payee) {
     return taxablepay - payee;
 }
-
-
-// const gross = grossIncome(20000, 6000, 43000);
-// const nhif = calculateNHIF(gross);
-// const nssf = NSSF(gross);
-// const taxableIncome = taxablePay(gross, nhif, nssf);
-// const payee = PAYEE(taxableIncome);
-// const netSalary = netPay(taxableIncome, payee);
-// console.log(netSalary);
