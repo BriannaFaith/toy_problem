@@ -26,6 +26,7 @@ Navigate to the project directory cd toy_problem
 Install dependencies npm install
 
 ##Technologies
+
 Javascript
 
 ##Licence
