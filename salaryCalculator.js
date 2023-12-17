@@ -1,50 +1,79 @@
-function calculateNetSalary(basicSalary, benefits) {
-    // Constants for tax rates
-    const PAYE_THRESHOLD = 24000;
-    const PAYE_RATE_1 = 0.1;
-    const PAYE_RATE_2 = 0.25;
-
-    // Constants for deductions
-    const NHIF_RATE = 0.015;
-    const NSSF_RATE = 0.06;
-
-    // Calculate gross salary
-    const grossSalary = basicSalary + benefits;
-
-    // Calculate PAYE (Tax)
-    let paye = 0;
-    if (grossSalary > PAYE_THRESHOLD) {
-        paye = PAYE_THRESHOLD * PAYE_RATE_1 + (grossSalary - PAYE_THRESHOLD) * PAYE_RATE_2;
+function grossIncome(basicSalary, ...allowances) {
+    let sum = basicSalary;
+    for (let allowance of allowances) {
+        sum += allowance;
     }
-
-    // Calculate NHIF Deductions
-    const nhifDeductions = grossSalary * NHIF_RATE;
-
-    // Calculate NSSF Deductions
-    const nssfDeductions = grossSalary * NSSF_RATE;
-
-    // Calculate Net Salary
-    const netSalary = grossSalary - paye - nhifDeductions - nssfDeductions;
-
-    // Return the results
-    return {
-        grossSalary,
-        paye,
-        nhifDeductions,
-        nssfDeductions,
-        netSalary
-    };
+    return sum;
 }
 
-// Example usage:
-const basicSalary = parseFloat(prompt("Enter the basic salary:"));
-const benefits = parseFloat(prompt("Enter the benefits:"));
+function calculateNHIF(grossPay) {
+    if (grossPay <= 5999) {
+        return 150;
+    } else if (grossPay <= 7999) {
+        return 300;
+    } else if (grossPay <= 11999) {
+        return 400;
+    } else if (grossPay <= 14999) {
+        return 500;
+    } else if (grossPay <= 19999) {
+        return 600;
+    } else if (grossPay <= 24999) {
+        return 750;
+    } else if (grossPay <= 29999) {
+        return 850;
+    } else if (grossPay <= 34999) {
+        return 900;
+    } else if (grossPay <= 39999) {
+        return 950;
+    } else if (grossPay <= 44999) {
+        return 1000;
+    } else if (grossPay <= 49999) {
+        return 1100;
+    } else if (grossPay <= 59999) {
+        return 1200;
+    } else if (grossPay <= 69999) {
+        return 1300;
+    } else if (grossPay <= 79999) {
+        return 1400;
+    } else if (grossPay <= 89999) {
+        return 1500;
+    } else if (grossPay <= 99999) {
+        return 1600;
+    } else {
+        return 1700;
+    }
+}
 
-const salaryDetails = calculateNetSalary(basicSalary, benefits);
+function NSSF(pensionablePay) {
+    return pensionablePay * 0.06;
+}
 
-// Display the results
-console.log("Gross Salary:", salaryDetails.grossSalary);
-console.log("PAYE (Tax):", salaryDetails.paye);
-console.log("NHIF Deductions:", salaryDetails.nhifDeductions);
-console.log("NSSF Deductions:", salaryDetails.nssfDeductions);
-console.log("Net Salary:", salaryDetails.netSalary);
+function taxablePay(grossIncome, ...deductions) {
+    for (let deduction of deductions) {
+        grossIncome -= deduction;
+    }
+    return grossIncome;
+}
+
+function PAYEE(taxablepay) {
+    if (taxablepay <= 24000) {
+        return taxablepay * 0.1;
+    } else if (taxablepay <= 32333) {
+        return taxablepay * 0.25;
+    } else if (taxablepay > 32333) {
+        return taxablepay * 0.3;
+    }
+}
+
+function netPay(taxablepay, payee) {
+    return taxablepay - payee;
+}
+
+
+// const gross = grossIncome(20000, 6000, 43000);
+// const nhif = calculateNHIF(gross);
+// const nssf = NSSF(gross);
+// const taxableIncome = taxablePay(gross, nhif, nssf);
+// const payee = PAYEE(taxableIncome);
+// const netSalary = netPay(taxableIncome, payee);
+// console.log(netSalary);
