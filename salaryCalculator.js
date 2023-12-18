@@ -1,3 +1,17 @@
+// Import the prompt-sync library
+const promptSync = require('prompt-sync');
+const prompt = promptSync();
+
+// Prompt the user to  input basic salary
+const basicSalary = parseFloat(prompt('Enter the basic salary: '));
+
+let bonus = 0;
+let allowances = 0;
+let relief = 5000 + 9000 + 2400;
+
+// Call the grossIncome function to calculate the gross income
+const grossIncomeValue = grossIncome(basicSalary);
+
 // grossIncome composition
 function grossIncome(basicSalary, ...allowances) {
     let sum = basicSalary;
@@ -6,6 +20,10 @@ function grossIncome(basicSalary, ...allowances) {
     }
     return sum;
 }
+
+// Call the calculateNHIF function to calculate NHIF deduction
+const nhifDeduction = calculateNHIF(grossIncomeValue);
+
 // NHIF deduction based on gross pay
 function calculateNHIF(grossPay) {
     //NHIF rates
@@ -45,10 +63,19 @@ function calculateNHIF(grossPay) {
         return 1700;
     }
 }
+
+// Call the NSSF function to calculate NSSF deduction
+const nssfDeduction = NSSF(grossIncomeValue);
+
 //NSSF deduction based on pensionable pay
 function NSSF(pensionablePay) {
     return pensionablePay * 0.06;
 }
+
+
+// Call the taxablePay function to calculate taxable pay
+const taxableIncome = taxablePay(grossIncomeValue, nhifDeduction, nssfDeduction);
+
 //Deducting specified amounts from gross income
 function taxablePay(grossIncome, ...deductions) {
     for (let deduction of deductions) {
@@ -56,6 +83,10 @@ function taxablePay(grossIncome, ...deductions) {
     }
     return grossIncome;
 }
+
+// Call the PAYEE function to calculate PAYEE deduction
+const payeeDeduction = PAYEE(taxableIncome);
+
 //PAYEE deduction  against taxable pay levels
 function PAYEE(taxablepay) {
     if (taxablepay <= 24000) {
@@ -67,7 +98,14 @@ function PAYEE(taxablepay) {
     }
 }
 
+// Call the netPay function to calculate net pay
+const netSalary = netPay(taxableIncome, payeeDeduction);
+
 //net pay after deducting PAYEE from taxable pay
 function netPay(taxablepay, payee) {
     return taxablepay - payee;
 }
+
+
+console.log(`Taxable Income: ${taxableIncome}`);
+console.log(`Net Pay: ${netSalary}`);
