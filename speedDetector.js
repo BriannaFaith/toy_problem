@@ -2,7 +2,7 @@
 const prompt = require('prompt-sync')();
 //Prompt to get input of speed
 const carSpeed = prompt("Enter the speed of the car:");
-calculateDemeritPoints(parseFloat(carSpeed));
+demeritPoints(parseFloat(carSpeed));
 
 //demeritPoints function calculation
 function demeritPoints(speed) {
