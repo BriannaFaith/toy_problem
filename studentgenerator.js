@@ -29,7 +29,7 @@ function studentGrade(marks){
         }
     } else {
         //error message for invalid input
-    return ("Please enter a number between 0 and 100.");
+    return ("Invalid!.Please enter a number between 0 and 100.");
     }
 }
 //displaying the result
